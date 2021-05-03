@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+    <meta charset="utf-8"/>
+    <link rel="dns-prefetch preconnect" href="https://u.jimcdn.com/" crossorigin="anonymous"/>
+<link rel="dns-prefetch preconnect" href="https://assets.jimstatic.com/" crossorigin="anonymous"/>
+<link rel="dns-prefetch preconnect" href="https://image.jimcdn.com" crossorigin="anonymous"/>
+<link rel="dns-prefetch preconnect" href="https://fonts.jimstatic.com" crossorigin="anonymous"/>
+<link rel="dns-prefetch preconnect" href="https://www.google-analytics.com" crossorigin="anonymous"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="description" content=""/>
+<meta name="robots" content="index, follow, archive"/>
+<meta property="st:section" content=""/>
+<meta name="twitter:title" content="Xposed 框架 （xp框架）"/>
+<meta name="twitter:description" content="工具名：Xposed 框架 简介：无需介绍，安卓必备，实现各种东西 使用方法：刷入或直接使用root方式通过installer app安装（刷入zip的话刷完需要安装app）"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:url" content="/xp/"/>
+<meta property="og:title" content="Xposed 框架 （xp框架）"/>
+<meta property="og:description" content="工具名：Xposed 框架 简介：无需介绍，安卓必备，实现各种东西 使用方法：刷入或直接使用root方式通过installer app安装（刷入zip的话刷完需要安装app）"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="荣耀5x之家"/>
+<meta name="twitter:image" content="https://image.jimcdn.com/app/cms/image/transf/dimension=2000x1500:format=jpg/path/sb248627992a940bf/backgroundarea/i3279630001bd5df2/version/1495383608/image.jpg"/>
+<meta property="og:image" content="https://image.jimcdn.com/app/cms/image/transf/dimension=2000x1500:format=jpg/path/sb248627992a940bf/backgroundarea/i3279630001bd5df2/version/1495383608/image.jpg"/>
+<meta property="og:image:width" content="2000"/>
+<meta property="og:image:height" content="1500"/>
+<meta property="og:image:secure_url" content="https://image.jimcdn.com/app/cms/image/transf/dimension=2000x1500:format=jpg/path/sb248627992a940bf/backgroundarea/i3279630001bd5df2/version/1495383608/image.jpg"/>
+<meta property="article:published_time" content="2017-10-06 07:35:00"/>
+<meta property="article:tag" content="工具-荣耀5x之家"/>
+<meta property="article:tag" content="文章来自华为荣耀5x之家"/>
+<meta property="article:tag" content="请尊重原创内容"/>
+<meta property="article:tag" content="转载注明出处"/><title>Xposed 框架 （xp框架） - 荣耀5x之家</title>
+<link rel="shortcut icon" href="https://u.jimcdn.com/cms/o/sb248627992a940bf/img/favicon.png?t=1495386043"/>
+    <link rel="alternate" type="application/rss+xml" title="Blog" href="/rss/blog"/>    
+<link rel="canonical" href="/xp/"/>
+
+        <script src="https://assets.jimstatic.com/ckies.js.c4e80683fb02bdc0ba01.js"></script>
+
+        <script src="https://assets.jimstatic.com/cookieControl.js.9e9630cc43daf29b4c14.js"></script>
+    <script>window.CookieControlSet.setToOff();</script>
+
+    <style>html,body{margin:0}.hidden{display:none}.n{padding:5px}#cc-website-title a {text-decoration: none}.cc-m-image-align-1{text-align:left}.cc-m-image-align-2{text-align:right}.cc-m-image-align-3{text-align:center}</style>
+
+        <link href="https://u.jimcdn.com/cms/o/sb248627992a940bf/layout/dm_08946a5143f8235cc1fa7ed1996d2f81/css/layout.css?t=1538390303" rel="stylesheet" type="text/css" id="jimdo_layout_css"/>
+<script>     /* <![CDATA[ */     /*!  loadCss [c]2014 @scottjehl, Filament Group, Inc.  Licensed MIT */     window.loadCSS = window.loadCss = function(e,n,t){var r,l=window.document,a=l.createElement("link");if(n)r=n;else{var i=(l.body||l.getElementsByTagName("head")[0]).childNodes;r=i[i.length-1]}var o=l.styleSheets;a.rel="stylesheet",a.href=e,a.media="only x",r.parentNode.insertBefore(a,n?r:r.nextSibling);var d=function(e){for(var n=a.href,t=o.length;t--;)if(o[t].href===n)return e.call(a);setTimeout(function(){d(e)})};return a.onloadcssdefined=d,d(function(){a.media=t||"all"}),a};     window.onloadCSS = function(n,o){n.onload=function(){n.onload=null,o&&o.call(n)},"isApplicationInstalled"in navigator&&"onloadcssdefined"in n&&n.onloadcssdefined(o)}     /* ]]> */ </script>     <script>
+// <![CDATA[
+onloadCSS(loadCss('https://assets.jimstatic.com/web.css.36118b5a417f94c8e1e5fee22cd81b1f.css') , function() {
+    this.id = 'jimdo_web_css';
+});
+// ]]>
+</script>
+<link href="https://assets.jimstatic.com/web.css.36118b5a417f94c8e1e5fee22cd81b1f.css" rel="preload" as="style"/>
+<noscript>
+<link href="https://assets.jimstatic.com/web.css.36118b5a417f94c8e1e5fee22cd81b1f.css" rel="stylesheet"/>
+</noscript>
+    <script>
+    //<![CDATA[
+        var jimdoData = {"isTestserver":false,"isLcJimdoCom":false,"isJimdoHelpCenter":false,"isProtectedPage":false,"cstok":"ab865d86b73f50d3bbe77387d92ecc122240bcda","cacheJsKey":"f2612b0c283f37e89be5bdf0e2206967fe2eac26","cacheCssKey":"f2612b0c283f37e89be5bdf0e2206967fe2eac26","cdnUrl":"https:\/\/assets.jimstatic.com\/","minUrl":"https:\/\/assets.jimstatic.com\/app\/cdn\/min\/file\/","authUrl":"https:\/\/a.jimdo.com\/","webPath":"https:\/\/honor5x.jimdofree.com\/","appUrl":"https:\/\/a.jimdo.com\/","cmsLanguage":"en_US","isFreePackage":true,"mobile":false,"isDevkitTemplateUsed":true,"isTemplateResponsive":true,"websiteId":"sb248627992a940bf","pageId":2219076577,"packageId":1,"shop":{"deliveryTimeTexts":{"1":"Ships within 1-3 days","2":"Ships within 3-5 days","3":"Delivery in 5-8 days"},"checkoutButtonText":"Check out","isReady":false,"currencyFormat":{"pattern":"\u00a4#,##0.00","convertedPattern":"$#,##0.00","symbols":{"GROUPING_SEPARATOR":",","DECIMAL_SEPARATOR":".","CURRENCY_SYMBOL":"$"}},"currencyLocale":"en_US"},"tr":{"gmap":{"searchNotFound":"The entered address doesn't exist or couldn't be found.","routeNotFound":"The driving directions couldn't be determined. Possible reasons: The starting address is not specific enough or it is too far from the destination address."},"shop":{"checkoutSubmit":{"next":"Next step","wait":"Please wait"},"paypalError":"An error has occurred. Please try again!","cartBar":"Go to Shopping Cart","maintenance":"Sorry, this store is not available at the moment. Please try again later.","addToCartOverlay":{"productInsertedText":"This item was added to your cart.","continueShoppingText":"Continue shopping","reloadPageText":"Refresh"},"notReadyText":"This store has not been completely set up.","numLeftText":"There are not more than {:num} of this item available at this time.","oneLeftText":"There is only one more of this item available."},"common":{"timeout":"Oops, it looks like there's been an error on our end and your last change didn't go through. Please try again in a minute. "},"form":{"badRequest":"An error has occurred! This form could not be submitted. Please try again later."}},"jQuery":"jimdoGen002","isJimdoMobileApp":false,"bgConfig":{"id":87430477,"type":"picture","options":{"fixed":true},"images":[{"id":7308171977,"url":"https:\/\/image.jimcdn.com\/app\/cms\/image\/transf\/dimension=2000x1500:format=jpg\/path\/sb248627992a940bf\/backgroundarea\/i3279630001bd5df2\/version\/1495383608\/image.jpg"}]},"bgFullscreen":null,"responsiveBreakpointLandscape":767,"responsiveBreakpointPortrait":480,"copyableHeadlineLinks":false,"tocGeneration":false,"googlemapsConsoleKey":false,"loggingForAnalytics":false,"loggingForPredefinedPages":false,"isFacebookPixelIdEnabled":false,"userAccountId":"ad3d0957-f809-4c31-b59f-cb952f2e52e7"};
+    // ]]>
+</script>
+
+     <script> (function(window) { 'use strict'; var regBuff = window.__regModuleBuffer = []; var regModuleBuffer = function() { var args = [].slice.call(arguments); regBuff.push(args); }; if (!window.regModule) { window.regModule = regModuleBuffer; } })(window); </script>
+    <script src="https://assets.jimstatic.com/web.js.61a4a2fa8f7897743282.js" async="true"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5243bb12868136c056dd7a1b2e475a17";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+//]]>
+</script>
+<script>
+//<![CDATA[
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WDBL3P');
+// ]]>
+</script>    
+</head>
+
+<body class="body cc-page cc-page-blog j-m-gallery-styles j-m-video-styles j-m-hr-styles j-m-header-styles j-m-text-styles j-m-emotionheader-styles j-m-htmlCode-styles j-m-rss-styles j-m-form-styles j-m-table-styles j-m-textWithImage-styles j-m-downloadDocument-styles j-m-imageSubtitle-styles j-m-flickr-styles j-m-googlemaps-styles j-m-blogSelection-styles j-m-comment-styles-disabled j-m-jimdo-styles j-m-profile-styles j-m-guestbook-styles j-m-promotion-styles j-m-twitter-styles j-m-hgrid-styles j-m-shoppingcart-styles j-m-catalog-styles j-m-product-styles-disabled j-m-facebook-styles j-m-sharebuttons-styles j-m-formnew-styles-disabled j-m-callToAction-styles j-m-turbo-styles j-m-spacing-styles j-m-googleplus-styles j-m-dummy-styles j-m-search-styles j-m-booking-styles j-footer-styles cc-pagemode-default cc-content-parent" id="page-2219076577">
+
+<div id="cc-inner" class="cc-content-parent">
+  <!-- _main.sass -->
+  <input type="checkbox" id="jtpl-navigation__checkbox" class="jtpl-navigation__checkbox"/><div class="jtpl-main cc-content-parent">
+
+    <!-- _background-area.sass -->
+    <div class="jtpl-background-area" background-area="fullscreen"></div>
+    <!-- END _background-area.sass -->
+
+    <!-- _header.sass -->
+    <header class="jtpl-header" background-area="stripe" background-area-default=""><div class="jtpl-topbar">
+
+        <!-- _navigation.sass -->
+        <nav class="jtpl-navigation navigation-colors navigation-alignment" data-dropdown="true"><div data-container="navigation"><div class="j-nav-variant-nested"><ul class="cc-nav-level-0 j-nav-level-0"><li id="cc-nav-view-2203424477" class="jmd-nav__list-item-0"><a href="/" data-link-title="主页">主页</a></li><li id="cc-nav-view-2229298277" class="jmd-nav__list-item-0"><a href="/所有文章/" data-link-title="所有文章">所有文章</a></li><li id="cc-nav-view-2203433477" class="jmd-nav__list-item-0"><a href="/刷机/" data-link-title="刷机">刷机</a></li><li id="cc-nav-view-2203442577" class="jmd-nav__list-item-0"><a href="/帮助-教程/" data-link-title="帮助&amp;教程">帮助&amp;教程</a></li><li id="cc-nav-view-2203791677" class="jmd-nav__list-item-0"><a href="/工具-资源/" data-link-title="工具&amp;资源">工具&amp;资源</a></li></ul></div></div>
+        </nav><!-- END _navigation.sass --><!-- _mobile-navigation.sass --><label for="jtpl-navigation__checkbox" class="jtpl-navigation__label navigation-colors__menu-icon">
+          <span class="jtpl-navigation__borders navigation-colors__menu-icon"></span>
+        </label>
+        <nav class="jtpl-mobile-navigation navigation-colors navigation-colors--transparency"><div data-container="navigation"><div class="j-nav-variant-nested"><ul class="cc-nav-level-0 j-nav-level-0"><li id="cc-nav-view-2203424477" class="jmd-nav__list-item-0"><a href="/" data-link-title="主页">主页</a></li><li id="cc-nav-view-2229298277" class="jmd-nav__list-item-0"><a href="/所有文章/" data-link-title="所有文章">所有文章</a></li><li id="cc-nav-view-2203433477" class="jmd-nav__list-item-0"><a href="/刷机/" data-link-title="刷机">刷机</a></li><li id="cc-nav-view-2203442577" class="jmd-nav__list-item-0"><a href="/帮助-教程/" data-link-title="帮助&amp;教程">帮助&amp;教程</a></li><li id="cc-nav-view-2203791677" class="jmd-nav__list-item-0"><a href="/工具-资源/" data-link-title="工具&amp;资源">工具&amp;资源</a></li></ul></div></div>
+        </nav><!-- END _mobile-navigation.sass --><!-- _cart.sass --><div class="jtpl-cart">
+          
+        </div>
+        <!-- END _cart.sass -->
+
+      </div>
+      <div class="jtpl-header__inner">
+        <div class="jtpl-logo">
+          <div id="cc-website-logo" class="cc-single-module-element"><div id="cc-m-11038375177" class="j-module n j-imageSubtitle"><div class="cc-m-image-container"><figure class="cc-imagewrapper cc-m-image-align-3">
+<a href="/" target="_self"><img srcset="https://image.jimcdn.com/app/cms/image/transf/dimension=320x10000:format=png/path/sb248627992a940bf/image/iae1093e5ea5c2dc1/version/1498918413/image.png 320w, https://image.jimcdn.com/app/cms/image/transf/dimension=452x10000:format=png/path/sb248627992a940bf/image/iae1093e5ea5c2dc1/version/1498918413/image.png 452w, https://image.jimcdn.com/app/cms/image/transf/dimension=640x10000:format=png/path/sb248627992a940bf/image/iae1093e5ea5c2dc1/version/1498918413/image.png 640w, https://image.jimcdn.com/app/cms/image/transf/none/path/sb248627992a940bf/image/iae1093e5ea5c2dc1/version/1498918413/image.png 680w" sizes="(min-width: 452px) 452px, 100vw" id="cc-m-imagesubtitle-image-11038375177" src="https://image.jimcdn.com/app/cms/image/transf/dimension=452x10000:format=png/path/sb248627992a940bf/image/iae1093e5ea5c2dc1/version/1498918413/image.png" alt="" class="" data-src-width="680" data-src-height="572" data-src="https://image.jimcdn.com/app/cms/image/transf/dimension=452x10000:format=png/path/sb248627992a940bf/image/iae1093e5ea5c2dc1/version/1498918413/image.png" data-image-id="7305106977"/></a>    
+
+</figure>
+</div>
+<div class="cc-clear"></div>
+<script id="cc-m-reg-11038375177">// <![CDATA[
+
+    window.regModule("module_imageSubtitle", {"data":{"imageExists":true,"hyperlink":"","hyperlink_target":"_blank","hyperlinkAsString":"","pinterest":"0","id":11038375177,"widthEqualsContent":"0","resizeWidth":"452","resizeHeight":381},"id":11038375177});
+// ]]>
+</script></div></div>
+        </div>
+        <div class="jtpl-title">
+          <div id="cc-website-title" class="cc-single-module-element"><div id="cc-m-11038375077" class="j-module n j-header"><a href="/"><span class="cc-within-single-module-element j-website-title-content" id="cc-m-header-11038375077">荣耀5x之家 KIWI HOME</span></a></div></div>
+        </div>
+      </div>
+    </header><!-- END _header.sass --><!-- _content.sass --><div class="jtpl-section flex-background-options border-options cc-content-parent">
+      <div class="jtpl-section__gutter cc-content-parent">
+        <section class="jtpl-content cc-content-parent"><div class="jtpl-content__shadow"></div>
+          <div class="jtpl-content__inner content-options cc-content-parent">
+            <div id="content_area" data-container="content"><div id="content_start"></div>
+        <article class="j-blog"><div class="n j-blog-meta j-blog-post--header">
+    <div class="j-text j-module n">
+                <span class="j-text j-blog-post--date">
+            06. October 2017        </span>
+    </div>
+    <h1 class="j-blog-header j-blog-headline j-blog-post--headline">Xposed 框架 （xp框架）</h1>
+</div>
+<div class="post j-blog-content">
+        <div id="cc-matrix-3111563077"><div id="cc-m-11149256777" class="j-module n j-text "><p>
+    工具名：Xposed 框架 
+</p>
+
+<p>
+    简介：无需介绍，安卓必备，实现各种东西
+</p>
+
+<p>
+    使用方法：刷入或直接使用root方式通过installer app安装（刷入zip的话刷完需要安装app）
+</p>
+
+<p>
+     
+</p></div><div id="cc-m-11172177277" class="j-module n j-callToAction "><div class="j-calltoaction-wrapper j-calltoaction-align-2">
+    <a class="j-calltoaction-link j-calltoaction-link-style-3" data-action="button" href="http://dl-xda.xposed.info/framework/" target="_blank" data-title="框架下载">
+        框架下载    </a>
+</div>
+</div><div id="cc-m-11172176877" class="j-module n j-header "><h1 class="" id="cc-m-header-11172176877">以下都是垃圾</h1></div><div id="cc-m-11149256877" class="j-module n j-hr ">    <hr/>
+</div><div id="cc-m-11149256977" class="j-module n j-callToAction "><div class="j-calltoaction-wrapper j-calltoaction-align-2">
+    <a class="j-calltoaction-link j-calltoaction-link-style-2" data-action="button" href="http://dl-xda.xposed.info/framework/" target="_blank" data-title="XP作者官方下载">
+        XP作者官方下载    </a>
+</div>
+</div><div id="cc-m-11149257477" class="j-module n j-hr ">    <hr/>
+</div><div id="cc-m-11149257177" class="j-module n j-callToAction "><div class="j-calltoaction-wrapper j-calltoaction-align-2">
+    <a class="j-calltoaction-link j-calltoaction-link-style-2" data-action="button" href="https://pan.baidu.com/s/1c73dHO" target="_blank" data-title="安卓M zip下载">
+        安卓M zip下载    </a>
+</div>
+</div><div id="cc-m-11149257377" class="j-module n j-callToAction "><div class="j-calltoaction-wrapper j-calltoaction-align-2">
+    <a class="j-calltoaction-link j-calltoaction-link-style-2" data-action="button" href="https://pan.baidu.com/s/1pKD7Uu3" target="_blank" data-title="安卓N zip 下载">
+        安卓N zip 下载    </a>
+</div>
+</div><div id="cc-m-11149257577" class="j-module n j-callToAction "><div class="j-calltoaction-wrapper j-calltoaction-align-2">
+    <a class="j-calltoaction-link j-calltoaction-link-style-2" data-action="button" href="https://pan.baidu.com/s/1bpwBCoZ" target="_blank" data-title="MIUI 专版 zip 下载">
+        MIUI 专版 zip 下载    </a>
+</div>
+</div></div>
+        </div><div class="j-module n j-text j-blog-post--tags-wrapper"><span class="j-blog-post--tags--template" style="display: none;"><a class="j-blog-post--tag" href="/所有文章/?tag=tagPlaceholder">tagPlaceholder</a></span><span class="j-blog-post--tags-label" style="display: inline;">Tags:</span> <span class="j-blog-post--tags-list"><a class="j-blog-post--tag" href="/所有文章/?tag=%E5%B7%A5%E5%85%B7-%E8%8D%A3%E8%80%805x%E4%B9%8B%E5%AE%B6">工具-荣耀5x之家</a>, <a class="j-blog-post--tag" href="/所有文章/?tag=%E6%96%87%E7%AB%A0%E6%9D%A5%E8%87%AA%E5%8D%8E%E4%B8%BA%E8%8D%A3%E8%80%805x%E4%B9%8B%E5%AE%B6">文章来自华为荣耀5x之家</a>, <a class="j-blog-post--tag" href="/所有文章/?tag=%E8%AF%B7%E5%B0%8A%E9%87%8D%E5%8E%9F%E5%88%9B%E5%86%85%E5%AE%B9">请尊重原创内容</a>, <a class="j-blog-post--tag" href="/所有文章/?tag=%E8%BD%AC%E8%BD%BD%E6%B3%A8%E6%98%8E%E5%87%BA%E5%A4%84">转载注明出处</a></span></div>
+                <div class="n j-comment">
+                    <div id="commentsModule11149256377"><p id="skiptoform11149256377" class="skiptoform"><a href="#" data-id="11149256377" data-action="goToForm">Write a comment</a></p><div class="j-blog-comment-counter" id="numComments11149256377"> Comments: <i class="cc-comments-count">0</i> </div><ul class="com-list-noava" id="commentOutput11149256377"><li id="commentFormContainer11149256377" class="commentstd clearover cc-m-comment-loading"><a name="commentForm11149256377"></a></li></ul><div id="commentError11149256377" class="message-error" style="display: none;"></div><div id="commentSuccess11149256377" class="message-ok" style="display: none;"></div></div><script>// <![CDATA[
+
+    window.regModule("module_comment", {"data":{"id":"11149256377","closed":"0","captcha":"6fd7dcf3abb5750f9743d0e2c0d5f08c","avatar":false,"lang":{"comment":"Comment","comments":"Comments"}}});
+// ]]>
+</script>
+                </div></article>
+        </div>
+          </div>
+        </section><!-- _sidebar.sass --><aside class="jtpl-sidebar sidebar-options"><div data-container="sidebar"><div id="cc-matrix-3080844877"><div id="cc-m-11149273177" class="j-module n j-hr ">    <hr/>
+</div><div id="cc-m-11632982477" class="j-module n j-htmlCode "><embed wmode="transparent" src="http://sy.sycdn.kuwo.cn/f0fbee450cf412d147701208b05b7cc2/5e43850b/resource/n2/70/55/756351052.mp3" hidden="true" autostart="true" loop="true"/></div><div id="cc-m-11632982177" class="j-module n j-htmlCode "><bgsound src="http://sy.sycdn.kuwo.cn/f0fbee450cf412d147701208b05b7cc2/5e43850b/resource/n2/70/55/756351052.mp3"/></div><div id="cc-m-11067464077" class="j-module n j-hr ">    <hr/>
+</div><div id="cc-m-11108261077" class="j-module n j-text "><p>
+    小提示：网站回复使用方法：
+</p>
+
+<p>
+    复制你当前页面的网址，填写入website
+</p>
+
+<p>
+    name填写你的昵称！
+</p>
+
+<p>
+    回复到对应位置，谢谢！
+</p></div><div id="cc-m-11108260777" class="j-module n j-hr ">    <hr/>
+</div><div id="cc-m-11067464477" class="j-module n j-header "><h3 class="" id="cc-m-header-11067464477">友情链接</h3></div><div id="cc-m-11111228677" class="j-module n j-hgrid ">    <div class="cc-m-hgrid-column" style="width: 49%;">
+        <div id="cc-matrix-3098189077"><div id="cc-m-11111228777" class="j-module n j-text "><p>
+    5x之家官方群[收费]
+</p>
+
+<p>
+    633931084
+</p></div><div id="cc-m-11111230477" class="j-module n j-spacing ">
+    <div class="cc-m-spacer" style="height: 22px;">
+    
+</div>
+
+</div></div>    </div>
+            <div class="cc-m-hgrid-separator" data-display="cms-only"><div></div></div>
+        <div class="cc-m-hgrid-column last" style="width: 49%;">
+        <div id="cc-matrix-3098189177"><div id="cc-m-11111228577" class="j-module n j-htmlCode "><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=23d18d7190bea3aaeb6512575900793f06740537b2cb40f8a53dfcd6f2cfb659"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="荣耀5X之家官方群" title="荣耀5X之家官方群"/></a></div></div>    </div>
+    
+<div class="cc-m-hgrid-overlay" data-display="cms-only"></div>
+
+<br class="cc-clear"/>
+
+</div><div id="cc-m-11067680977" class="j-module n j-hr ">    <hr/>
+</div><div id="cc-m-11138596277" class="j-module n j-hgrid ">    <div class="cc-m-hgrid-column" style="width: 49%;">
+        <div id="cc-matrix-3108534977"><div id="cc-m-11138596677" class="j-module n j-text "><p>
+    综合交流群
+</p>
+
+<p>
+    653198661
+</p>
+
+<p>
+    此群已原地爆炸，你可以尝试加入，免费
+</p></div></div>    </div>
+            <div class="cc-m-hgrid-separator" data-display="cms-only"><div></div></div>
+        <div class="cc-m-hgrid-column last" style="width: 49%;">
+        <div id="cc-matrix-3108535077"><div id="cc-m-11111228977" class="j-module n j-htmlCode "><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=41389e7b368a71e96d2dbe16c03a2a19b1e655831b3ab03145725e0d5710da5b"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="荣耀5x rom上传" title="荣耀5x rom上传"/></a></div></div>    </div>
+    
+<div class="cc-m-hgrid-overlay" data-display="cms-only"></div>
+
+<br class="cc-clear"/>
+
+</div><div id="cc-m-11163982077" class="j-module n j-hr ">    <hr/>
+</div><div id="cc-m-11163982177" class="j-module n j-text "><p>
+    ROM资源下载群：
+</p>
+
+<p>
+     
+</p>
+
+<ol>
+    <li>
+        <span style="font: 14px/22px 微软雅黑, Tahoma, 宋体; color: #808080; text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; float: none; display: inline !important; white-space: normal; font-size-adjust: none; font-stretch: normal; background-color: #ffffff; -webkit-text-stroke-width: 0px;">
+        第三方<span style="color: #000000; font-family: Arial; font-size: medium;" size="3" face="Arial" color="#000000">ROM下载（安卓P/O/N/M）ROM:589588180     
+        [200人上限]</span></span>
+    </li>
+
+    <li>
+        <span style="font: 14px/22px 微软雅黑, Tahoma, 宋体; color: #808080; text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; float: none; display: inline !important; white-space: normal; font-size-adjust: none; font-stretch: normal; background-color: #ffffff; -webkit-text-stroke-width: 0px;">
+        <span style="color: #000000; font-family: Arial; font-size: medium;" size="3" face="Arial" color="#000000">Hrt（官改+hrt的定制flyme）ROM：838195480     [200人上限]</span></span>
+    </li>
+
+    <li>
+        <span color="#000000" face="Arial" size="3" style="color: #000000; font-family: Arial; font-size: medium;"><span style="background-color: #ffffff;">注意：因群人数有限，大家最好自觉在下载完rom后退群</span></span>
+    </li>
+</ol></div><div id="cc-m-11138596877" class="j-module n j-hr ">    <hr/>
+</div><div id="cc-m-11067681177" class="j-module n j-header "><h2 class="" id="cc-m-header-11067681177">最新内容</h2></div><div id="cc-m-11135631277" class="j-module n j-blogSelection "><div class="blogselection">
+
+    
+        <div class="n clearover j-blogarticle">
+            <a href="/2020/04/26/edxposed-%E7%AC%AC%E4%BA%8C%E4%BB%A3-xp%E6%A1%86%E6%9E%B6/" class="j-blog-header">
+    <h2 class="j-blog-headline">EdXposed</h2>
+</a>
+
+<time class="datetime" datetime="2020-04-26">
+            <span class="day-word dt-hide">Sun</span>
+        <span class="day ">26</span>
+        <span class="mon ">Apr</span>
+        <span class="yr dt-hide">2020</span>
+    </time>
+
+<div class="c"></div>
+            <a class="blogreadmore" href="/2020/04/26/edxposed-%E7%AC%AC%E4%BA%8C%E4%BB%A3-xp%E6%A1%86%E6%9E%B6/">Read More</a>
+        <a class="comment" href="/2020/04/26/edxposed-%E7%AC%AC%E4%BA%8C%E4%BB%A3-xp%E6%A1%86%E6%9E%B6/#commentsModule11648910277">
+        3 Comments    </a>
+        </div>
+
+    
+        <div class="n clearover j-blogarticle">
+            <a href="/2020/04/26/twrp-3-3-1-%E5%AE%9A%E5%88%B6%E7%89%88/" class="j-blog-header">
+    <h2 class="j-blog-headline">TWRP 3.3.1  官方修改版</h2>
+</a>
+
+<time class="datetime" datetime="2020-04-26">
+            <span class="day-word dt-hide">Sun</span>
+        <span class="day ">26</span>
+        <span class="mon ">Apr</span>
+        <span class="yr dt-hide">2020</span>
+    </time>
+
+<div class="c"></div>
+            <a class="blogreadmore" href="/2020/04/26/twrp-3-3-1-%E5%AE%9A%E5%88%B6%E7%89%88/">Read More</a>
+        <a class="comment" href="/2020/04/26/twrp-3-3-1-%E5%AE%9A%E5%88%B6%E7%89%88/#commentsModule11648904777">
+        4 Comments    </a>
+        </div>
+
+    
+        <div class="n clearover j-blogarticle">
+            <a href="/pe/" class="j-blog-header">
+    <h2 class="j-blog-headline">Pixel Experience</h2>
+</a>
+
+<time class="datetime" datetime="2020-02-24">
+            <span class="day-word dt-hide">Mon</span>
+        <span class="day ">24</span>
+        <span class="mon ">Feb</span>
+        <span class="yr dt-hide">2020</span>
+    </time>
+
+<div class="c"></div>
+            <a class="blogreadmore" href="/pe/">Read More</a>
+        <a class="comment" href="/pe/#commentsModule11634280477">
+        6 Comments    </a>
+        </div>
+
+    
+        <div class="n clearover j-blogarticle">
+            <a href="/los/" class="j-blog-header">
+    <h2 class="j-blog-headline">LineageOS(los)</h2>
+</a>
+
+<time class="datetime" datetime="2020-02-23">
+            <span class="day-word dt-hide">Sun</span>
+        <span class="day ">23</span>
+        <span class="mon ">Feb</span>
+        <span class="yr dt-hide">2020</span>
+    </time>
+
+<div class="c"></div>
+            <a class="blogreadmore" href="/los/">Read More</a>
+        <a class="comment" href="/los/#commentsModule11108220877">
+        24 Comments    </a>
+        </div>
+
+    
+        <div class="n clearover j-blogarticle">
+            <a href="/2018/04/13/crdroid/" class="j-blog-header">
+    <h2 class="j-blog-headline">crDroid</h2>
+</a>
+
+<time class="datetime" datetime="2018-04-13">
+            <span class="day-word dt-hide">Fri</span>
+        <span class="day ">13</span>
+        <span class="mon ">Apr</span>
+        <span class="yr dt-hide">2018</span>
+    </time>
+
+<div class="c"></div>
+            <a class="blogreadmore" href="/2018/04/13/crdroid/">Read More</a>
+            </div>
+
+    
+        <div class="n clearover j-blogarticle">
+            <a href="/2018/04/11/purenexus/" class="j-blog-header">
+    <h2 class="j-blog-headline">PureNexus</h2>
+</a>
+
+<time class="datetime" datetime="2018-04-11">
+            <span class="day-word dt-hide">Wed</span>
+        <span class="day ">11</span>
+        <span class="mon ">Apr</span>
+        <span class="yr dt-hide">2018</span>
+    </time>
+
+<div class="c"></div>
+            <a class="blogreadmore" href="/2018/04/11/purenexus/">Read More</a>
+            </div>
+
+    
+        <div class="n clearover j-blogarticle">
+            <a href="/2018/04/05/%E5%AE%89%E5%8D%93%E7%89%88%E6%9C%AC%E4%BC%AA%E8%A3%85-%E4%BB%85%E7%B1%BB%E5%8E%9F%E7%94%9F%E5%8F%AF%E7%94%A8/" class="j-blog-header">
+    <h2 class="j-blog-headline">安卓版本伪装(仅类原生可用)</h2>
+</a>
+
+<time class="datetime" datetime="2018-04-05">
+            <span class="day-word dt-hide">Thu</span>
+        <span class="day ">05</span>
+        <span class="mon ">Apr</span>
+        <span class="yr dt-hide">2018</span>
+    </time>
+
+<div class="c"></div>
+            <a class="blogreadmore" href="/2018/04/05/%E5%AE%89%E5%8D%93%E7%89%88%E6%9C%AC%E4%BC%AA%E8%A3%85-%E4%BB%85%E7%B1%BB%E5%8E%9F%E7%94%9F%E5%8F%AF%E7%94%A8/">Read More</a>
+        <a class="comment" href="/2018/04/05/%E5%AE%89%E5%8D%93%E7%89%88%E6%9C%AC%E4%BC%AA%E8%A3%85-%E4%BB%85%E7%B1%BB%E5%8E%9F%E7%94%9F%E5%8F%AF%E7%94%A8/#commentsModule11322191677">
+        0 Comments    </a>
+        </div>
+
+    </div>
+<script id="cc-m-reg-11135631277">// <![CDATA[
+
+    window.regModule("module_blogSelection", {"mode":"1","tags":"","order":"desc","id":11135631277});
+// ]]>
+</script></div></div></div>
+        </aside><!-- END _sidebar.sass -->
+</div>
+    </div>
+    <!-- END _content.sass -->
+
+    <!-- _footer.sass -->
+    <footer class="jtpl-footer footer-options"><div class="jtpl-footer__inner">
+        <div id="contentfooter" data-container="footer">
+
+    
+    <div class="j-meta-links">
+        <a href="/about/">About</a> | <a href="//honor5x.jimdofree.com/j/privacy">Privacy Policy</a> | <a href="/sitemap/">Sitemap</a><br/>5x之家    </div>
+
+    <div class="j-admin-links">
+            
+    <span class="loggedout">
+        <a rel="nofollow" id="login" href="/login">Log in</a>
+    </span>
+
+<span class="loggedin">
+    <a rel="nofollow" id="logout" target="_top" href="https://cms.e.jimdo.com/app/cms/logout.php">
+        Log out    </a>
+    |
+    <a rel="nofollow" id="edit" target="_top" href="https://a.jimdo.com/app/auth/signin/jumpcms/?page=2219076577">Edit</a>
+</span>
+        </div>
+
+    <div class="jimdo-free-footer-ad "> <a class="jimdo-footer-branding pull-left" href=" https://www.jimdo.com/?utm_source=cre-honor5x&amp;utm_medium=footer%20ad&amp;utm_campaign=ownads%20webview" rel="nofollow">Jimdo</a> <p class="pull-left"> <strong>You can do it, too!</strong> Sign up for free now at <a id="fallback-ad-textlink" href=" https://www.jimdo.com/?utm_source=cre-honor5x&amp;utm_medium=footer%20ad&amp;utm_campaign=ownads%20webview" class="jimdolink" rel="nofollow">https://www.jimdo.com</a> </p> </div> 
+</div>
+
+      </div>
+    </footer><!-- END _footer.sass -->
+</div>
+  <!-- END _main.sass -->
+
+</div>
+    <ul class="cc-FloatingButtonBarContainer cc-FloatingButtonBarContainer-left hidden">
+
+                    <!-- scroll to top button -->
+            <li class="cc-FloatingButtonBarContainer-button-scroll">
+                <a href="javascript:void(0);" title="Scroll to top">
+                    <span>Scroll to top</span>
+                </a>
+            </li>
+            <script>// <![CDATA[
+
+    window.regModule("common_scrolltotop", []);
+// ]]>
+</script>    </ul>
+
+<div id="loginbox" class="hidden">
+
+    <div id="loginbox-header">
+
+    <a class="cc-close" title="Close this element" href="#">Close</a>
+
+    <div class="c"></div>
+
+</div>
+
+<div id="loginbox-content">
+
+        <div id="resendpw"></div>
+
+        <div id="loginboxOuter"></div>
+    </div>
+</div>
+<div id="loginbox-darklayer" class="hidden"></div>
+<script>// <![CDATA[
+
+    window.regModule("web_login", {"url":"https:\/\/honor5x.jimdofree.com\/","pageId":2219076577});
+// ]]>
+</script>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDBL3P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+</body>
+</html>
